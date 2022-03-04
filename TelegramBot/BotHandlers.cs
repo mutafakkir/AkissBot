@@ -1,4 +1,5 @@
-﻿using Telegram.Bot;
+﻿using AkissBot.Entities;
+using Telegram.Bot;
 using Telegram.Bot.Exceptions;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
@@ -44,7 +45,7 @@ public class BotHandlers
         throw new Exception("This type update can't be handled.");
     }
 
-    private async Task BotOnMessageRecieved(ITelegramBotClient client, Message? message)
+    private async Task BotOnMessageRecieved(ITelegramBotClient client, Message message)
     {
         if (message.Text == "/start")
         {
@@ -53,5 +54,7 @@ public class BotHandlers
                 "Hello)"
             );
         }
+        var user = new Entities.User(message.Chat.Id);
+        var teacher = new Teacher(user);
     }
 }
