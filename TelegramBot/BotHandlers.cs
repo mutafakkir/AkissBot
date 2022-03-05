@@ -51,10 +51,15 @@ public class BotHandlers
         {
             await client.SendTextMessageAsync(
                 message.Chat.Id,
-                "Hello)"
+                "Assalomu alaykum.\n\n Al-Xorazmiy nomidagi xalqaro ixtisoslashtirilgan maktabiga hush kelibsiz. Iltimos, familiya, ismingiz va sharifingizni kiriting.\nMasalan: Abdullayev Abror Asad o'g'li."
             );
         }
-        var user = new Entities.User(message.Chat.Id);
-        var teacher = new Teacher(user);
+        if (message.Document != null)
+        {
+            //await client.SendTextMessageAsync(message.Chat.Id, message.Document.MimeType);
+            if(message.Document.MimeType == "application/pdf")
+            await client.SendTextMessageAsync(message.Chat.Id, "ok");
+            //await client.SendDocumentAsync(message.Chat.Id, message.Document.FileId);
+        }
     }
 }
